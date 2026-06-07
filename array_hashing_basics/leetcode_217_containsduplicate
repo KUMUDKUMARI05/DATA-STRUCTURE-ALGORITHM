@@ -1,0 +1,69 @@
+// Problem: Contains Duplicate (LC #217)
+// Date: 09/06/2025
+// Pattern: Hashmap frequency count
+// Brute: nested loop, check every pair O(n²) O(1)
+// My solution: freq map, check if any count > 1 O(n) O(n)
+// Optimal: unordered_set, stop on first duplicate O(n) O(n)
+// Gap: my solution correct but does extra work — builds
+//      full map before checking. Set stops immediately.
+// Reuse when: detect any repeated element in array
+
+3BRUTE FORCE
+//TIME COMPLEXITY ;-o(n^2)
+//space complexity:-o(1);
+//not it's just not efficient for large inputs.
+
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        for(int i =0;i<nums.size();i++)
+        {
+            for(int j=i+1;j<nums.size();j++)
+            {
+                if (nums[i]==nums[j])
+                return true;
+            }
+        }
+        return false;
+        
+    }
+};
+
+#optimized solution 
+//time complexity o(2n)
+//space complexityo(n)
+
+/* can use set as well ;because there
+was no need or operation on frequency 
+*/
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_map<int,int> freq;
+
+        for(int i = 0; i < nums.size(); i++) {
+            freq[nums[i]]++;
+        }
+
+        for(auto it : freq) {
+            if(it.second > 1)
+                return true;   // duplicate found
+        }
+
+        return false;          // no duplicates
+    }
+};
+
+
+
+# optimised code(better version)
+unordered_set<int> st;
+
+for(int num : nums)
+{
+    if(st.count(num))// count to check the existence
+        return true;
+
+    st.insert(num);
+}
