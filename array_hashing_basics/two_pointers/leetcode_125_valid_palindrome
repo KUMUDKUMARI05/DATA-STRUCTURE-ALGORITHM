@@ -1,0 +1,66 @@
+// Problem: Valid Palindrome (LC 125)
+// Date: 08/06/2025
+// Pattern: TWO POINTER
+// Brute: storing the string in temp vector(only alphanumeric);comparison;o(SC:o(n),TC:o(n))
+// My solution: using two pointers
+// Optimal:my solution using two pointers(SC:o(1);TC:o(n))
+// Gap: in optimized i used if instead of while and isalnum(*)&&
+//       transform(s.begin(), s.end(), s.begin(), ::tolower)(*)
+
+
+
+
+
+
+
+
+#optimized codeclass Solution {
+    time complexity =o(n)
+    space complexity =o(1)
+    # gap MISTAKE THAT I DID  WAS USING if INSTED OF while loop
+public:
+    bool isPalindrome(string s) {
+        int left=0;
+        int right=s.size()-1;
+       
+       transform(s.begin(), s.end(), s.begin(), ::tolower);
+
+        while(left<right)
+        {
+            while (left<right&& !isalnum(s[left]))left++;
+            while (left<right && !isalnum(s[right]))right--;
+                 
+            if(s[left]!=s[right])
+            return false;
+            left++;
+            right--;
+            
+        }
+        return true;
+
+        
+    }
+};
+
+
+#brute force 
+space complexity=o(n)
+timecomplexity=o(n)
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        vector<char>temp;
+        for(int i=0;i<s.size();i++)
+        {
+            if(isalnum(s[i]))
+            {
+                temp.push_back(tolower(s[i]));
+            }
+        }
+        vector<char>temp1=temp;
+        reverse(temp1.begin(),temp1.end());
+        return(temp==temp1);
+        
+    }
+};

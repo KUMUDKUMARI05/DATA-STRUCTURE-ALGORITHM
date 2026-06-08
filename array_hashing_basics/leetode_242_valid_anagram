@@ -1,5 +1,5 @@
 // Problem: Valid Anagram (LC#242)
-// Date: 09/06/2025
+// Date: 07/06/2025
 // Pattern: Hashmap frequency count
 // Brute: sort both strings, compare O(n log n) O(1)
 // Optimal: freq map increment/decrement O(n) O(n)
