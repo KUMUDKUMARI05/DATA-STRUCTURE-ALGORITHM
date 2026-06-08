@@ -1,0 +1,36 @@
+// Problem:  Two Sum II (LC#167)
+// Date: 08/06/2025
+// Pattern:two pointers
+// 
+// Optimal: left and right pointers shifting left is sum <target and right-- when sum>target O(n) O(1)
+// Gap: while returning syntax error
+
+
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int left =0;
+        int right=numbers.size()-1;
+        int sum =0;
+        while(left<right)
+        {
+            sum=numbers[right]+numbers[left];
+           if(sum<target)
+           {
+            left++;
+           }
+           else if(sum>target)
+           {
+            right--;
+           }
+           else
+           {
+            return{left+1,right+1};
+           }
+
+
+        }
+        return{-1,-1};
+    }   
+};
