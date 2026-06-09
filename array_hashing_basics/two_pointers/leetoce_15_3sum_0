@@ -1,0 +1,57 @@
+Problem: Best Time to Buy and Sell Stock (LC21)
+Pattern: Sliding window / greedy — track running minimum
+Brute: two nested loops O(n²) O(1)
+Optimal: one loop, track min price seen so far O(n) O(1)
+Gap: used two pointers scanning backwards — unnecessary.
+     Just track minimum so far and calculate profit each day.
+Reuse when: maximize difference where left must come before right
+
+#brute force
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+       
+      vector<vector<int>>ans;
+      sort(nums.begin(),nums.end());
+      for(int i=0;i<=nums.size()-2;i++)
+      {
+        if(i>0&&nums[i]==nums[i-1])
+        continue;
+        int target=nums[i]*(-1);
+        int left=i+1;
+        int right=nums.size()-1;
+        while(left<right)
+        {
+            int sum =nums[left]+nums[right];
+            if(target>sum)
+            {
+                left++;
+            }
+            else if(target<sum)
+            {
+                right--;
+            }
+            else if(sum==target)
+            {
+                ans.push_back({nums[i],nums[left],nums[right]});
+                left++;
+                right--;
+                while(left<right&&nums[left-1]==nums[left])
+                left++;
+                while(left<right&&nums[right+1]==nums[right])
+                right--;
+            }
+        }
+      }
+      return ans;
+    }
+};
+#optimised solution 
+int minPrice = INT_MAX;
+int maxProfit = 0;
+
+for (int i = 0; i < prices.size(); i++) {
+    minPrice = min(minPrice, prices[i]);
+    maxProfit = max(maxProfit, prices[i] - minPrice);
+}
+return maxProfit;
