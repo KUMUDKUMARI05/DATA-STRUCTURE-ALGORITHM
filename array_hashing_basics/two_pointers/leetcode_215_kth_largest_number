@@ -1,0 +1,31 @@
+
+// Problem: kth largest number(LC 215)
+// Date: 14/06/2025
+// Pattern: HEAP
+//My solution:o(nlog k)+o(k)
+
+
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+      priority_queue<int, vector<int>, greater<int>> pq;
+        for(int i=0;i<k;i++)//insertion into heap
+        {
+            pq.push(nums[i]);
+        }
+        int i =k;                    
+        while(i<nums.size())
+        {
+            if(nums[i]>pq.top())
+            {
+                pq.pop();
+                pq.push(nums[i]);
+            }
+            i++;
+        }
+        return(pq.top());
+
+        
+    }
+};
