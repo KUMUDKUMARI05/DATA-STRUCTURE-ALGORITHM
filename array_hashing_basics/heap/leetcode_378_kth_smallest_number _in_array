@@ -1,0 +1,54 @@
+// Problem: kth smallest in sorted array (LC#378)
+// Date: 17/06/2025
+// Pattern: Heapquestion
+
+class Solution {
+public:
+
+    class Node {
+    public:
+        int val, row, col;
+
+        Node(int v, int r, int c) {
+            val = v;
+            row = r;
+            col = c;
+        }
+    };
+
+    struct compare {
+        bool operator()(Node* a, Node* b) {
+            return a->val > b->val;   // min heap
+        }
+    };
+
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+
+        priority_queue<Node*, vector<Node*>, compare> pq;
+
+        // push first element of every row
+        for (int i = 0; i < matrix.size(); i++) {
+            pq.push(new Node(matrix[i][0], i, 0));
+        }
+
+        int result = -1;
+
+        while (k-- && !pq.empty()) {
+
+            Node* curr = pq.top();
+            pq.pop();
+
+            result = curr->val;
+
+            int r = curr->row;
+            int c = curr->col;
+
+            // push next element of same row
+            if (c + 1 < matrix[r].size()) {
+                pq.push(new Node(matrix[r][c + 1], r, c + 1));
+            }
+        }
+
+        return result;
+    }
+};
