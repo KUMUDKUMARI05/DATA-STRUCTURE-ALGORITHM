@@ -1,7 +1,7 @@
 // Problem: lc 621
 // Date: 18/06/2025
 /* Pattern: Use a max heap to always execute the most frequent available 
-*/ task, and a queue to temporarily hold tasks during their cooldown period.
+*/ task,  a queue to temporarily hold tasks during their cooldown period.
 
 
 
