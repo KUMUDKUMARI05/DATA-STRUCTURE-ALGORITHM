@@ -1,0 +1,43 @@
+// Problem: lc 621
+// Date: 18/06/2025
+/* Pattern: Use a max heap to always execute the most frequent available 
+*/ task, and a queue to temporarily hold tasks during their cooldown period.
+
+
+
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        unordered_map<char,int>freq;
+         priority_queue<int>pq;
+        for(int i=0;i<tasks.size();i++)
+        {
+            freq[tasks[i]]++;
+        }
+        for(auto it:freq)
+            pq.push(it.second);
+            queue<pair<int,int>>lb;//number,time;
+            int time=0;
+        while(!pq.empty()||!lb.empty())
+        {
+            time++;
+            if(!pq.empty())
+            {
+           int current=pq.top();
+           pq.pop();
+           current--;
+            
+           if(current>0)
+            lb.push({current,time+n});
+            }
+            if(!lb.empty()&&lb.front().second==time)
+            {
+                pq.push(lb.front().first);
+                lb.pop();
+            }
+        }
+        return time;
+        
+    }
+};
