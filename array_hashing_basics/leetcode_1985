@@ -1,0 +1,36 @@
+Problem:  (LC#1985)
+// Date: 20/06/2025
+// Pattern:heap
+
+
+
+
+class Solution {
+public:
+    string kthLargestNumber(vector<string>& nums, int k) {
+        struct compare
+        {
+            bool operator()(string &a,string &b)
+            {
+                 if (a.size() == b.size())
+                return a < b;
+            return a.size() < b.size();
+            }
+        };
+        
+        priority_queue<string,vector<string>,compare>pq;
+        
+        string  result=nums[0];
+        for(int i =0;i<nums.size();i++)
+        {
+            pq.push(nums[i]);
+        }
+        while(k--)
+        {
+         result=pq.top();
+            pq.pop();
+        }
+        return result;
+        
+    }
+};
